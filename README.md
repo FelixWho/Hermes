@@ -1,5 +1,15 @@
 # Testing Speech to Text Libraries
 
+## AMI Scripts
+
+Will require pydub, ffmpeg
+
+    python split_audio.py AMI_WAV_PATH.wav AMI_LABELS.xml OUTPUT_DIRECTORY # splits AMI audio into chunks of about 10 seconds
+
+    python randomize_csv.py CSV_PATH.csv # randomizes csv rows
+
+    python split_csv.py CSV_PATH.csv OUTPUT_DIRECTORY # split data into 70-15-15
+
 ## Automatic-Speech-Recognition
 
 ### Requirements
