@@ -4,7 +4,9 @@
 
 Will require pydub, ffmpeg
 
-    python split_audio.py AMI_WAV_PATH.wav AMI_LABELS.xml OUTPUT_DIRECTORY # splits AMI audio into chunks of about 10 seconds
+    python split_audio.py AMI_WAV_PATH.wav AMI_LABELS.xml OUTPUT_DIRECTORY # splits AMI audio into chunks of about 15 seconds
+
+## Universal Scripts
 
     python randomize_csv.py CSV_PATH.csv # randomizes csv rows
 

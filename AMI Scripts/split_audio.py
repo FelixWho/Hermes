@@ -7,7 +7,7 @@ import math
 import os
 from pathlib import Path
 import csv
-# by default, script attempts to generate 10 second clips
+# by default, script attempts to generate 15 second clips
 
 # take arguments from command line
 parser = argparse.ArgumentParser()
@@ -46,7 +46,7 @@ end = float(entries[0].attrib["endtime"])
 words_in_interval = []
 
 for entry in entries:
-    if(float(entry.attrib["starttime"]) - start > 10):
+    if(float(entry.attrib["starttime"]) - start > 15):
         # load current time intervals and transcripts into arrays
         transcripts.append(" ".join(words_in_interval))
         intervals.append({"starttime": start, "endtime": end})
@@ -62,6 +62,8 @@ for entry in entries:
             if c == '\'':
                 continue
             text = text.replace(c, "")
+        if text.lower() == "mmhmm": # AMI corpus technicality
+            text = "mhm"
         words_in_interval.append(text.lower())
     end = float(entry.attrib["endtime"])
 
@@ -77,7 +79,7 @@ intervals.append({"starttime": start, "endtime": end})
 
 count = 0
 offset = 5
-orig_audio = AudioSegment.from_wav(args.input_audio)
+orig_audio = AudioSegment.from_wav(args.input_audio) + 10
 base = os.path.basename(args.input_audio)
 name = os.path.splitext(base)[0] # use the base filename for naming each segment
 
