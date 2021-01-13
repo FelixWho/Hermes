@@ -9,5 +9,5 @@ args = parser.parse_args()
 
 df = pd.read_csv(args.input_csv, header=0)
 ds = df.sample(frac=1)
-ds.to_csv(args.input_csv)
+ds.to_csv(args.input_csv, index=False)
 
