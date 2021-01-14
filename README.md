@@ -31,9 +31,12 @@ Note: this repo's scripts create data with 16000hz sample rate. It is recommende
     mkdir output_models
 
 - Add the unzipped checkpoint to fine_tuning_checkpoints
+  
 - Add the csv files to training_csvs
 
-    python3 DeepSpeech.py --n_hidden 2048 --checkpoint_dir fine_tuning_checkpoints/deepspeech-0.9.3-checkpoint --epochs 3 --train_files training_csvs/train.csv --dev_files training_csvs/dev.csv --test_files training_csvs/test.csv --learning_rate 0.0001 --export_dir output_models --load_cudnn
+```
+python3 DeepSpeech.py --n_hidden 2048 --checkpoint_dir fine_tuning_checkpoints/deepspeech-0.9.3-checkpoint --epochs 3 --train_files training_csvs/train.csv --dev_files training_csvs/dev.csv --test_files training_csvs/test.csv --learning_rate 0.0001 --export_dir output_models --load_cudnn
+```
 
 ## Using the DeepSpeech model
 
