@@ -9,6 +9,7 @@ Will require pydub, ffmpeg
 ## TalkBank CallHome Scripts
 
 Will require pydub, ffmpeg
+    
     python split_audio.py TALKBANK_MP3_PATH CHA_LABELS_PATH OUTPUT_DIRECTORY
 
 ## Universal Scripts
@@ -29,6 +30,7 @@ Previous scripts created data with 16000hz sample rate
     mkdir output_models
 
 Add the unzipped checkpoint to fine_tuning_checkpoints
+
 Add the csv files to training_csvs
 
     python3 DeepSpeech.py --n_hidden 2048 --checkpoint_dir fine_tuning_checkpoints/deepspeech-0.9.3-checkpoint --epochs 3 --train_files training_csvs/train.csv --dev_files training_csvs/dev.csv --test_files training_csvs/test.csv --learning_rate 0.0001 --export_dir output_models --load_cudnn
