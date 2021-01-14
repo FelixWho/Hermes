@@ -22,8 +22,9 @@ Will require pydub, ffmpeg
 
 ## Training the DeepSpeech Model
 
-Previous scripts created data with 16000hz sample rate
+Note: this repo's scripts create data with 16000hz sample rate. It is recommended to have all audio files with this sample rate.
 
+    git clone --branch v0.9.3 https://github.com/mozilla/DeepSpeech
     cd DeepSpeech
     mkdir training_csvs
     mkdir fine_tuning_checkpoints
@@ -45,9 +46,6 @@ Add the csv files to training_csvs
 
     pip3 install deepspeech
 
-    curl -LO https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.pbmm
-    curl -LO https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.scorer
-
 ### Usage
 
-    deepspeech --model deepspeech-0.9.3-models.pbmm --scorer deepspeech-0.9.3-models.scorer --audio AUDIO_FILE_PATH.wav
+    deepspeech --model MODEL_PATH --audio AUDIO_FILE_PATH.wav
