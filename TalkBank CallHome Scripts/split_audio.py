@@ -69,10 +69,9 @@ def removePunc(tokens):
         for c in string.punctuation:
             if c == '\'':
                 continue
-            if c == '_':
-                spl[0] = spl[0].replace(c, " ")
-            else:
-                spl[0] = spl[0].replace(c, "")
+            spl[0] = spl[0].replace(c, " ")
+            spl[0] = spl[0].replace('\n', " ")
+            spl[0] = spl[0].replace('\t', " ")
         if spl[0].isspace() or spl[0] == "":
             continue # don't want empty text
         for i in range(len(spl)):
@@ -159,6 +158,7 @@ splitSeconds(transcriptsB, intervalsB, tokensB)
 count = 0
 offset = 5
 orig_audio = AudioSegment.from_mp3(args.input_mp3)
+orig_audio = orig_audio.set_frame_rate(16000)
 base = os.path.basename(args.input_mp3)
 name = os.path.splitext(base)[0]
 

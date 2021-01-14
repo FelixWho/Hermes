@@ -62,6 +62,7 @@ for entry in entries:
             if c == '\'':
                 continue
             text = text.replace(c, "")
+            text = text.replace('\n', " ")
         if text.lower() == "mmhmm": # AMI corpus technicality
             text = "mhm"
         words_in_interval.append(text.lower())
