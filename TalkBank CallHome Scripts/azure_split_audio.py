@@ -21,7 +21,7 @@ tokensA = []
 tokensB = []
 intervalsA = []
 intervalsB = []
-csv_rows = []
+rows = []
 
 with open(args.input_cha, 'r') as content_file:
     content = content_file.read()
@@ -187,16 +187,17 @@ splitSeconds(transcriptsA, intervalsA, tokensA)
 splitSeconds(transcriptsB, intervalsB, tokensB)
 
 count = 0
-offset = 5
+offset = 5 # start the sound segment a bit earlier, to ensure the first word is captured
 orig_audio = AudioSegment.from_mp3(args.input_mp3)
 orig_audio = orig_audio.set_frame_rate(16000)
 base = os.path.basename(args.input_mp3)
 name = os.path.splitext(base)[0]
 
+# split left, right audio channels
 speakerA_audio = orig_audio.split_to_mono()[0]
 speakerB_audio = orig_audio.split_to_mono()[1]
 
-def formatForCSV(transcripts, intervals, speaker):
+def formatForOutput(transcripts, intervals, speaker):
     global count
     for i in range(0, len(intervals)):
         interval = intervals[i]
@@ -208,18 +209,14 @@ def formatForCSV(transcripts, intervals, speaker):
         audio_name = str(args.output) + "/" + name + "_audio_" + str(count) + ".wav"
         new_audio.export(audio_name, format="wav")
 
-        csv_rows.append([name + "_audio_" + str(count) + ".wav", Path(audio_name).stat().st_size, transcripts[i]])
+        rows.append(name + "_audio_" + str(count) + ".wav\t" + transcripts[i])
 
         count+=1
 
-formatForCSV(transcriptsA, intervalsA, speakerA_audio)
-formatForCSV(transcriptsB, intervalsB, speakerB_audio)
+formatForOutput(transcriptsA, intervalsA, speakerA_audio)
+formatForOutput(transcriptsB, intervalsB, speakerB_audio)
 
-# output results to csv file
-fields = ["wav_filename", "wav_filesize", "transcript"]
-
-with open(str(args.output) + "/" + name + ".csv", 'w') as csvfile:  
-    csvwriter = csv.writer(csvfile)  
-    csvwriter.writerow(fields)  
-    csvwriter.writerows(csv_rows) 
-
+# output to plain txt file
+with open(str(args.output) + "/" + name + ".txt", 'w') as file:  
+    for line in rows:
+        file.write(line+"\n")
